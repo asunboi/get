@@ -1,0 +1,1 @@
+ln -s /gpfs/home/asun/jin_lab/get/pipeline1_cellranger/M2XM_220316_211-R_C01 M2XM_220316_211-R_C01

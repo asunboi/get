@@ -1,0 +1,2 @@
+/var/spool/slurm/d/job37498995/slurm_script: line 12: module: command not found
+/var/spool/slurm/d/job37498995/slurm_script: line 19: cellranger-arc: command not found
