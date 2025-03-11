@@ -1,7 +1,19 @@
 INPUTS FOR PREPROCESSING
 filtered_feature_bc_matrix.h5
 
-02/28/2025
+## 03/10/2025
+Modified prepare_aggr to do the motif finding found in [https://github.com/GET-Foundation/get_model/issues/11].
+This is because to run the finetune_batac + finetune_lo, there needs to be a pretrained checkpoint; the checkpoint that is currently compatible with how hydra reads in the model checkpoints is the one published in the paper (./checkpoint-best.pth). Of note, this is a human checkpoint so there may be inconsistencies with mouse data.
+The issue with using pretrain mouse checkpoints generated de-novo from predict_atac is that this occurs:
+
+"RuntimeError: Error(s) in loading state_dict for GETRegionFinetune:
+Missing key(s) in state_dict: "encoder.blocks.0.norm1.weight", "encoder.blocks.0.norm1.bias", "encoder.blocks.0.attn.q_bias", "encoder.blocks.0.attn.v_bias", "encoder.blocks.0.attn.qkv.weight", "encoder.blocks.0.attn.proj.weight", ...
+
+Unexpected key(s) in state_dict: "mask_token", "head_mask.weight", "head_mask.bias", "encoder.encoder.blocks.0.norm1.weight", "encoder.encoder.blocks.0.norm1.bias", "encoder.encoder.blocks.0.attn.q_bias", "encoder.encoder.blocks.0.attn.v_bias", "encoder.encoder.blocks.0.attn.qkv.weight",
+
+Looks like the predict atac checkpoint writer is outdated. Tried to fix this with [https://github.com/GET-Foundation/get_model/issues/20], but it seems that using the human checkpoint is just better / bug free for now.
+
+## 02/28/2025
 RUN AZIMUTH.R IN EMPTY CONDA ENVIRONMENT WITH MODULE ACTIVATE R/4.3.0
 
 print(cell_number)
