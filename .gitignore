@@ -13,6 +13,38 @@ __pycache__/
 
 # Datafiles
 *.csv
-*.bed
 *.Robj
+*.tsv
+*.gz
+*.csv
+*.h5
+*.stats.*
 
+# Output Files
+*.png
+*.log
+
+# Bioinfo datafiles
+*.sam
+*.fa
+*.bt2
+*.out*
+*.fq*
+*.gtf
+*.bam*
+*.bed
+
+# Bioinfo reference databases
+**/star/
+
+# Specific to YAP
+**/yap_demultiplex
+all_rna_readnames.txt
+
+# Specific to GET
+**/M2XM_220316_211-R_C01
+**/M2XM_220325_216-R_B01
+**/get_model
+**/get_output
+**/ssp_agg/
+*.zarr/
