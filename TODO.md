@@ -1,3 +1,8 @@
+# 04/14/25
+/gpfs/home/asun/miniforge3/envs/get/lib/python3.12/site-packages/lightning/pytorch/trainer/setup.py:177: GPU available but not used. You can set it by doing `Trainer(accelerator='gpu')`.
+
+Main issue was in https://github.com/GET-Foundation/get_model/issues/7, where the run name was inconsistent between interpretation and cell type.
+
 # 03/27/2025
 Incredible that it's basically been a month since i've worked on GET, that's a suprisingly big setback in terms of my project progress.  
 Setup the GET project, put current tasks as issues on it.  
