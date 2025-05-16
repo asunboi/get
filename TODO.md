@@ -1,3 +1,6 @@
+# 05/16/25
+Working on methylation data preprocessing.
+
 # 04/14/25
 /gpfs/home/asun/miniforge3/envs/get/lib/python3.12/site-packages/lightning/pytorch/trainer/setup.py:177: GPU available but not used. You can set it by doing `Trainer(accelerator='gpu')`.
 
