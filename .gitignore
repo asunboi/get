@@ -47,4 +47,5 @@ all_rna_readnames.txt
 **/get_model
 **/get_output
 **/ssp_agg/
-*.zarr/
+*.zarr
+*.h5ad
