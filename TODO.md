@@ -29,6 +29,9 @@
 [Large-scale foundation model on single-cell transcriptomics](https://www.nature.com/articles/s41592-024-02305-7?fromPaywallRec=false)  
 [The importance of in-silico studies in drug discovery](https://www.sciencedirect.com/science/article/pii/S2949866X24000200)
 
+# 05/16/25
+Working on methylation data preprocessing.
+
 # 04/14/25
 /gpfs/home/asun/miniforge3/envs/get/lib/python3.12/site-packages/lightning/pytorch/trainer/setup.py:177: GPU available but not used. You can set it by doing `Trainer(accelerator='gpu')`.
 
