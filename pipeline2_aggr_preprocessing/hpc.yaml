@@ -1,0 +1,6 @@
+data_path: "/gpfs/home/asun/jin_lab/get/raw_data/"
+codebase: "/gpfs/home/asun/miniforge3/envs/get/lib/python3.12/site-packages/get_model/"
+output_dir: "/gpfs/home/asun/jin_lab/get/02_aggr_finetune/output"
+num_devices: 1
+num_workers: 2
+batch_size: 8
