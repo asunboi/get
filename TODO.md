@@ -29,6 +29,12 @@
 [Large-scale foundation model on single-cell transcriptomics](https://www.nature.com/articles/s41592-024-02305-7?fromPaywallRec=false)  
 [The importance of in-silico studies in drug discovery](https://www.sciencedirect.com/science/article/pii/S2949866X24000200)
 
+# 05/19/25
+Working on predict methyl.  
+Find the model code and configuration files at /home/alsun/miniforge3/envs/get/lib/python3.12/site-packages/get_model, symlink to home.  
+Since it's not instantiated with a github repo, no way to set upstream to fork of any kind. Will look into it.  
+
+
 # 05/16/25
 Working on methylation data preprocessing.
 
