@@ -29,6 +29,10 @@
 [Large-scale foundation model on single-cell transcriptomics](https://www.nature.com/articles/s41592-024-02305-7?fromPaywallRec=false)  
 [The importance of in-silico studies in drug discovery](https://www.sciencedirect.com/science/article/pii/S2949866X24000200)
 
+# 05/28/25
+Working on converting atac peaks into regions and averaging methylation across the regions. Currently bedtools has a bad intersection with the fact that two different references used to generate the files, so I am limiting it to canonical + sex chromosomes.
+
+
 # 05/19/25
 Working on predict methyl.  
 Find the model code and configuration files at /home/alsun/miniforge3/envs/get/lib/python3.12/site-packages/get_model, symlink to home.  
