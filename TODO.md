@@ -29,6 +29,9 @@
 [Large-scale foundation model on single-cell transcriptomics](https://www.nature.com/articles/s41592-024-02305-7?fromPaywallRec=false)  
 [The importance of in-silico studies in drug discovery](https://www.sciencedirect.com/science/article/pii/S2949866X24000200)
 
+# 05/29/25
+Working on getting the region embedding per gene. 
+
 # 05/16/25
 Working on methylation data preprocessing.
 
