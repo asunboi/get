@@ -1,6 +1,6 @@
 run:
   project_name: finetune_aggr_multiome
-  run_name: training_from_null_L6-IT_Astro_no_chr_split_binary_atac
+  run_name: noLO_embedding
   use_wandb: true
 type: region
 stage: fit
@@ -56,20 +56,20 @@ model:
 machine:
   codebase: /gpfs/home/asun/miniforge3/envs/get/lib/python3.12/site-packages/get_model/
   data_path: /gpfs/home/asun/jin_lab/get/raw_data/
-  output_dir: /gpfs/home/asun/jin_lab/get/3_aggr_embedding/output
+  output_dir: /gpfs/home/asun/jin_lab/get/3_aggr_embedding
   num_devices: 1
   num_workers: 2
   batch_size: 8
   fasta_path: ???
 dataset:
   zarr_path: ./aggr_multiome.zarr
-  celltypes: Astro,Endo,L2/3 IT,L5 ET,L5 IT,L5/6 NP,L6 CT,L6 IT,L6b,Lamp5,Meis2,Micro-PVM,OPC,Oligo,Peri,Pvalb,Sst,VLMC,Vip
+  celltypes: Astro,Endo
   transform: null
   quantitative_atac: false
   sampling_step: 100
   num_region_per_sample: 200
-  leave_out_chromosomes: null
-  leave_out_celltypes: L6 IT,Astro
+  leave_out_chromosomes: ''
+  leave_out_celltypes: Endo
   mask_ratio: 0.0
 training:
   save_ckpt_freq: 1
@@ -81,6 +81,7 @@ training:
   log_every_n_steps: 25
   val_check_interval: 0.5
   add_lr_monitor: false
+  save_every_n_epochs: null
 optimizer:
   lr: 0.0001
   min_lr: 0.0001

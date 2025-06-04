@@ -28,6 +28,21 @@
 [Delineating the effective use of self-supervised learning in single-cell genomics](https://www.nature.com/articles/s42256-024-00934-3?fromPaywallRec=false)  
 [Large-scale foundation model on single-cell transcriptomics](https://www.nature.com/articles/s41592-024-02305-7?fromPaywallRec=false)  
 [The importance of in-silico studies in drug discovery](https://www.sciencedirect.com/science/article/pii/S2949866X24000200)
+
+# 06/04/25
+Looking at the embedding for the encoder blocks in 3_aggr_embedding. Didn't work on monday night, but the astrocyte inference with embedding worked when using the example data.  
+Change in the inference region motif dataset function was because BCL6 was not in the inferable genes for our cell types.  
+THe main issue with running LO astrocyte and only pretraining on astrocyte was that the embedding space is dominated by the fetal/adult checkpoint.  
+Why does it work now? What did I change?  
+ - restricted cell types from 20 to just astro  
+ - used quantatative atac  
+ - LO chr from 0 -> chr11  
+ - inference region motif dataset gene list from BCL6 to Plpp3  
+Tested all of the above by changing them stepwise, but it still all works? I won't question it anymore, I assume maybe updating the github by uninstalling and reinstalling with pip might have been enough.   
+It looks like prediction power / self masking correlation for the infer_astrocyte seemed weak, check wandb.  
+The ability to predict self masking is good. The ability to predict GEX is good. How about differential genes then?  
+How different would it be if I used the mouse pretrain instead of the fetal/adult checkpoint?  
+
 # 05/29/25
 Working on getting the region embedding per gene. 
 
