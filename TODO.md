@@ -29,6 +29,11 @@
 [Large-scale foundation model on single-cell transcriptomics](https://www.nature.com/articles/s41592-024-02305-7?fromPaywallRec=false)  
 [The importance of in-silico studies in drug discovery](https://www.sciencedirect.com/science/article/pii/S2949866X24000200)
 
+# 06/05/25
+Working on how to fix the observed vs predicted expression issue in batac inference. I'm not sure that it's necessarily a problem, but I do think that we do not get enough variability in the expression profiles given that the individual predicted vs observed seems decent. Potentially it is because of the gene number? In the tutorial they use 15k genes, double the accessible 8k genes we have, but this should still not be that big of a difference? 
+
+The bounds for predicted logFC are intentionally set to 0.1; maybe prediction between cell types is still difficult?
+
 # 06/04/25
 Looking at the embedding for the encoder blocks in 3_aggr_embedding. Didn't work on monday night, but the astrocyte inference with embedding worked when using the example data.  
 Change in the inference region motif dataset function was because BCL6 was not in the inferable genes for our cell types.  

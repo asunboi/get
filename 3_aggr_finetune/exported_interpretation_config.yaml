@@ -56,7 +56,7 @@ model:
 machine:
   codebase: /gpfs/home/asun/miniforge3/envs/get/lib/python3.12/site-packages/get_model/
   data_path: /gpfs/home/asun/jin_lab/get/raw_data/
-  output_dir: /gpfs/home/asun/jin_lab/get/02_aggr_finetune/output
+  output_dir: /gpfs/home/asun/jin_lab/get/3_aggr_finetune/output
   num_devices: 1
   num_workers: 2
   batch_size: 8
@@ -81,6 +81,7 @@ training:
   log_every_n_steps: 25
   val_check_interval: 0.5
   add_lr_monitor: false
+  save_every_n_epochs: null
 optimizer:
   lr: 0.0001
   min_lr: 0.0001
@@ -91,7 +92,7 @@ optimizer:
   - 0.9
   - 0.999
 finetune:
-  resume_ckpt: /gpfs/home/asun/jin_lab/get/02_aggr_finetune/output/finetune_aggr_multiome/training_from_null_L6-IT_Astro_no_chr_split_binary_atac/checkpoints/best.ckpt
+  resume_ckpt: /gpfs/home/asun/jin_lab/get/3_aggr_finetune/output/finetune_aggr_multiome/training_from_null_L6-IT_Astro_no_chr_split_binary_atac/checkpoints/best.ckpt
   pretrain_checkpoint: false
   checkpoint: ./checkpoint-best.pth
   strict: true
