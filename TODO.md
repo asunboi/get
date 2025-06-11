@@ -34,6 +34,8 @@ Working on how to fix the observed vs predicted expression issue in batac infere
 
 The bounds for predicted logFC are intentionally set to 0.1; maybe prediction between cell types is still difficult?
 
+I want to look at the differences between the well correlated genes and the non-correlated genes, maybe GO analysis would be a good start? Still reading the paper more is also good. Maybe I should do this with more cell types? How does the pseudo bulk input work for each cell type?
+
 # 06/04/25
 Looking at the embedding for the encoder blocks in 3_aggr_embedding. Didn't work on monday night, but the astrocyte inference with embedding worked when using the example data.  
 Change in the inference region motif dataset function was because BCL6 was not in the inferable genes for our cell types.  
