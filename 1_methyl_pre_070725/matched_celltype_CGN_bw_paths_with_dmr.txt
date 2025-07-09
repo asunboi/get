@@ -1,0 +1,23 @@
+DMR Cell Type	Matched .bw Cell Type	Download URL
+Astro-NT_NN	Astro-NT_NN	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/Astro-NT_NN.CGN.bw
+Astro-TE_NN	Astro-TE_NN	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/Astro-TE_NN.CGN.bw
+CA1-ProS_Glut	CA1-ProS_Glut	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/CA1-ProS_Glut.CGN.bw
+CA3_Glut	CA3_Glut	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/CA3_Glut.CGN.bw
+CB-Granule-Glut	CB_Granule_Glut	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/CB_Granule_Glut.CGN.bw
+CB-Purkinje-Gaba	CBX_Purkinje_Gaba	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/CBX_Purkinje_Gaba.CGN.bw
+COAa-PAA-Barhl2-Glut	COAa-PAA-MEA_Barhl2_Glut	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/COAa-PAA-MEA_Barhl2_Glut.CGN.bw
+DG_Glut	DG_Glut	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/DG_Glut.CGN.bw
+Golgi-Gly-Gaba	CBX_Golgi_Gly-Gaba	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/CBX_Golgi_Gly-Gaba.CGN.bw
+IC-Tfap2d-Maf-Glut	IC_Tfap2d_Maf_Glut	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/IC_Tfap2d_Maf_Glut.CGN.bw
+IT-AON-TT-DP-Glut	IT_AON-TT-DP_Glut	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/IT_AON-TT-DP_Glut.CGN.bw
+IT-EP-CLA-Glut	IT_EP-CLA_Glut	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/IT_EP-CLA_Glut.CGN.bw
+L23_IT_CTX_Glut	L2_3_IT_CTX_Glut	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/L2_3_IT_CTX_Glut.CGN.bw
+L23_IT_ENT_Glut	L2_3_IT_ENT_Glut	ht tps://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/L2_3_IT_ENT_Glut.CGN.bw
+L23-IT-ENTl-PIR-Glut	L2_3_IT_PIR-ENTl_Glut	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/L2_3_IT_PIR-ENTl_Glut.CGN.bw
+L23_IT_PPP_Glut	L2_3_IT_PPP_Glut	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/L2_3_IT_PPP_Glut.CGN.bw
+L23-IT-RSP-Glut	L2_3_IT_RSP_Glut	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/L2_3_IT_RSP_Glut.CGN.bw
+L5_ET_CTX_Glut	L5_ET_CTX_Glut	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/L5_ET_CTX_Glut.CGN.bw
+L5-IT-CTX-Glut	L5_IT_CTX_Glut	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/L5_IT_CTX_Glut.CGN.bw
+L5_NP_CTX_Glut	L5_NP_CTX_Glut	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/L5_NP_CTX_Glut.CGN.bw
+L6_IT_CTX_Glut	L6_IT_CTX_Glut	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/L6_IT_CTX_Glut.CGN.bw
+Sncg-Gaba	Sncg_Gaba	https://data.nemoarchive.org/biccn/grant/u19_cemba/ecker/epigenome/cellgroup/mCseq3/mouse/processed/other/Sncg_Gaba.CGN.bw
