@@ -3,11 +3,12 @@
 export PATH=~/:$PATH
 
 # Define the input file
-mapping_file="/home/alsun/get/1_methyl_pre_070725/matched_celltype_CGN_bw_paths_with_dmr.txt"
+#mapping_file="/home/alsun/get/1_methyl_pre_070725/matched_celltype_CGN_bw_paths_with_dmr.txt"
+mapping_file="/home/alsun/get/1_methyl_pre_070725/bw_dmr_matches.tsv"
 
 # Skip header, extract column 1 and column 2 into separate arrays
-mapfile -t DMR_FILES < <(tail -n +2 "$mapping_file" | awk -F'\t' '{print $1}')
-mapfile -t BW_FILES < <(tail -n +2 "$mapping_file" | awk -F'\t' '{print $2}')
+mapfile -t BW_FILES < <(tail -n +2 "$mapping_file" | awk -F'\t' '{print $1}')
+mapfile -t DMR_FILES < <(tail -n +2 "$mapping_file" | awk -F'\t' '{print $2}')
 
 # Build a list of argument pairs
 ARGS=()
@@ -70,3 +71,4 @@ map_to_dmr() {
 export -f map_to_dmr
 
 parallel map_to_dmr ::: "${BW_FILES[@]}"
+
