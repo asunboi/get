@@ -1,0 +1,48 @@
+# .github/workflows/backfill-dates.yml
+name: Backfill Issue Dates
+
+on:
+  workflow_dispatch:
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add start/end dates to existing issues
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GH_PAT }}
+          script: |
+            const issues = await github.paginate(
+              github.rest.issues.listForRepo,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: 'all', // includes open and closed
+                per_page: 100,
+              }
+            );
+
+            for (const issue of issues) {
+              let body = issue.body || "";
+              let updated = false;
+
+              if (!body.includes("Start Date:")) {
+                body += `\n\nStart Date: ${issue.created_at}`;
+                updated = true;
+              }
+
+              if (issue.closed_at && !body.includes("End Date:")) {
+                body += `\nEnd Date: ${issue.closed_at}`;
+                updated = true;
+              }
+
+              if (updated) {
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  body: body,
+                });
+              }
+            }

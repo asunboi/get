@@ -1,0 +1,35 @@
+name: Track Issue Start/End Dates
+
+on:
+  issues:
+    types: [opened, closed]
+
+jobs:
+  update-issue-dates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Start or End Date
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issue = context.payload.issue;
+            const now = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+
+            if (context.payload.action === "opened") {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: issue.body + `\n\n**Start Date**: ${now}`
+              });
+            }
+
+            if (context.payload.action === "closed") {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: issue.body + `\n\n**End Date**: ${now}`
+              });
+            }
