@@ -56,13 +56,13 @@ model:
 machine:
   codebase: /gpfs/home/asun/miniforge3/envs/get/lib/python3.12/site-packages/get_model/
   data_path: /gpfs/home/asun/jin_lab/get/raw_data/
-  output_dir: /gpfs/home/asun/jin_lab/get/02_aggr_finetune/output
+  output_dir: /gpfs/home/asun/jin_lab/get/3_aggr_finetune/output
   num_devices: 1
   num_workers: 2
   batch_size: 8
   fasta_path: ???
 dataset:
-  zarr_path: ./aggr_multiome.zarr
+  zarr_path: /gpfs/home/asun/jin_lab/get/3_aggr_finetune/aggr_multiome.zarr
   celltypes: Astro,Endo,L2/3 IT,L5 ET,L5 IT,L5/6 NP,L6 CT,L6 IT,L6b,Lamp5,Meis2,Micro-PVM,OPC,Oligo,Peri,Pvalb,Sst,VLMC,Vip
   transform: null
   quantitative_atac: false
@@ -73,7 +73,7 @@ dataset:
   mask_ratio: 0.0
 training:
   save_ckpt_freq: 1
-  epochs: 50
+  epochs: 2
   warmup_epochs: 1
   accumulate_grad_batches: 1
   clip_grad: null
@@ -81,6 +81,7 @@ training:
   log_every_n_steps: 25
   val_check_interval: 0.5
   add_lr_monitor: false
+  save_every_n_epochs: null
 optimizer:
   lr: 0.0001
   min_lr: 0.0001
@@ -93,7 +94,7 @@ optimizer:
 finetune:
   resume_ckpt: null
   pretrain_checkpoint: false
-  checkpoint: ./checkpoint-best.pth
+  checkpoint: /gpfs/home/asun/jin_lab/get/3_aggr_finetune/checkpoint-best.pth
   strict: true
   model_key: model
   use_lora: false

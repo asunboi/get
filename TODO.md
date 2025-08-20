@@ -29,6 +29,11 @@
 [Large-scale foundation model on single-cell transcriptomics](https://www.nature.com/articles/s41592-024-02305-7?fromPaywallRec=false)  
 [The importance of in-silico studies in drug discovery](https://www.sciencedirect.com/science/article/pii/S2949866X24000200)
 
+# 07/24/25
+Raw data comes from https://singlecell.broadinstitute.org/single_cell/study/SCP2443/perturb-seq-rna-expression?label=CR&cluster=perturb_seq_cluster_data.tsv&spatialGroups=--&annotation=CellType--group--study&subsample=all, same 11.4k cells and 32285 gees; for some reason the celltype and UMAP projections are a little different from the data on our server. 
+
+It's definitely the same seurat clusters though... Won't think about it too much.
+
 # 06/05/25
 Working on how to fix the observed vs predicted expression issue in batac inference. I'm not sure that it's necessarily a problem, but I do think that we do not get enough variability in the expression profiles given that the individual predicted vs observed seems decent. Potentially it is because of the gene number? In the tutorial they use 15k genes, double the accessible 8k genes we have, but this should still not be that big of a difference? 
 
