@@ -1,6 +1,6 @@
 run:
   project_name: finetune_k562
-  run_name: training_from_null_k562_no_chr_split_binary_atac
+  run_name: training_from_null_k562_no_chr_split_binary_atac_50e
   use_wandb: true
 type: region
 stage: fit
@@ -73,7 +73,7 @@ dataset:
   mask_ratio: 0.0
 training:
   save_ckpt_freq: 1
-  epochs: 20
+  epochs: 50
   warmup_epochs: 1
   accumulate_grad_batches: 1
   clip_grad: null
