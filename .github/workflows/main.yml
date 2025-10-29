@@ -1,0 +1,95 @@
+name: Update Issue Start Dates in Project
+
+on:
+  workflow_dispatch:  # Manually trigger
+
+permissions:
+  issues: read
+  contents: read
+
+jobs:
+  update-start-dates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Start Dates
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}  # Need a PAT with project permissions
+          PROJECT_NUMBER: 3  # Your project number
+          ORG_OR_USER: asunboi  # or organization name
+        run: |
+          # Get project ID
+          PROJECT_ID=$(gh api graphql -f query='
+            query($org: String!, $number: Int!) {
+              user(login: $org) {
+                projectV2(number: $number) {
+                  id
+                }
+              }
+            }' -f org="$ORG_OR_USER" -F number=$PROJECT_NUMBER --jq '.data.user.projectV2.id')
+          
+          # Get Start Date field ID
+          FIELD_ID=$(gh api graphql -f query='
+            query($org: String!, $number: Int!) {
+              user(login: $org) {
+                projectV2(number: $number) {
+                  fields(first: 20) {
+                    nodes {
+                      ... on ProjectV2Field {
+                        id
+                        name
+                      }
+                      ... on ProjectV2SingleSelectField {
+                        id
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+            }' -f org="$ORG_OR_USER" -F number=$PROJECT_NUMBER --jq '.data.user.projectV2.fields.nodes[] | select(.name=="Start Date") | .id')
+          
+          # Get all issues in the repository
+          gh issue list --repo ${{ github.repository }} --limit 1000 --json number,createdAt --jq '.[] | "\(.number)|\(.createdAt)"' | while IFS='|' read -r ISSUE_NUMBER CREATED_AT; do
+            echo "Processing issue #$ISSUE_NUMBER (created: $CREATED_AT)"
+            
+            # Extract just the date (YYYY-MM-DD)
+            START_DATE=$(echo $CREATED_AT | cut -d'T' -f1)
+            
+            # Get the project item ID for this issue
+            ITEM_ID=$(gh api graphql -f query='
+              query($projectId: ID!, $issueNumber: Int!) {
+                repository(owner: "${{ github.repository_owner }}", name: "${{ github.event.repository.name }}") {
+                  issue(number: $issueNumber) {
+                    projectItems(first: 10) {
+                      nodes {
+                        id
+                        project {
+                          id
+                        }
+                      }
+                    }
+                  }
+                }
+              }' -f projectId="$PROJECT_ID" -F issueNumber=$ISSUE_NUMBER --jq ".data.repository.issue.projectItems.nodes[] | select(.project.id==\"$PROJECT_ID\") | .id")
+            
+            if [ -n "$ITEM_ID" ]; then
+              # Update the Start Date field
+              gh api graphql -f query='
+                mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $value: Date!) {
+                  updateProjectV2ItemFieldValue(input: {
+                    projectId: $projectId
+                    itemId: $itemId
+                    fieldId: $fieldId
+                    value: { date: $value }
+                  }) {
+                    projectV2Item {
+                      id
+                    }
+                  }
+                }' -f projectId="$PROJECT_ID" -f itemId="$ITEM_ID" -f fieldId="$FIELD_ID" -f value="$START_DATE"
+              
+              echo "✓ Updated issue #$ISSUE_NUMBER start date to $START_DATE"
+            else
+              echo "⚠ Issue #$ISSUE_NUMBER not in project"
+            fi
+          done
