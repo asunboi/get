@@ -62,9 +62,9 @@ jobs:
             }
             
             // Get status option IDs
-            const onTrackOption = statusField.options.find(o => o.name === '✅ On Track');
-            const overdueOption = statusField.options.find(o => o.name === '⚠️ Overdue (2+ weeks)');
-            const criticalOption = statusField.options.find(o => o.name === '🔴 Critical (4+ weeks)');
+            const onTrackOption = statusField.options.find(o => o.name === 'On Track');
+            const overdueOption = statusField.options.find(o => o.name === 'Overdue');
+            const criticalOption = statusField.options.find(o => o.name === 'Critical');
             
             // Get all open issues
             const issues = await github.paginate(github.rest.issues.listForRepo, {
