@@ -1,0 +1,164 @@
+name: Update Duration Status
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-status:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GH_PAT }}
+          script: |
+            const projectNumber = 3;
+            const orgOrUser = 'asunboi';
+            const TWO_WEEKS_MS = 14 * 24 * 60 * 60 * 1000;
+            const FOUR_WEEKS_MS = 28 * 24 * 60 * 60 * 1000;
+            
+            // Get project info including single select options
+            const projectQuery = `
+              query($org: String!, $number: Int!) {
+                user(login: $org) {
+                  projectV2(number: $number) {
+                    id
+                    fields(first: 30) {
+                      nodes {
+                        ... on ProjectV2Field {
+                          id
+                          name
+                        }
+                        ... on ProjectV2SingleSelectField {
+                          id
+                          name
+                          options {
+                            id
+                            name
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            `;
+            
+            const projectData = await github.graphql(projectQuery, {
+              org: orgOrUser,
+              number: projectNumber
+            });
+            
+            const projectId = projectData.user.projectV2.id;
+            const fields = projectData.user.projectV2.fields.nodes;
+            
+            const startDateField = fields.find(f => f.name === 'Start Date');
+            const endDateField = fields.find(f => f.name === 'End Date');
+            const statusField = fields.find(f => f.name === 'Duration Status');
+            
+            if (!startDateField || !endDateField || !statusField) {
+              throw new Error('Required fields not found');
+            }
+            
+            // Get status option IDs
+            const onTrackOption = statusField.options.find(o => o.name === 'On Track');
+            const overdueOption = statusField.options.find(o => o.name === 'Overdue');
+            const criticalOption = statusField.options.find(o => o.name === 'Critical');
+            
+            // Get all open issues
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100
+            });
+            
+            for (const issue of issues) {
+              const itemQuery = `
+                query($owner: String!, $repo: String!, $issueNumber: Int!) {
+                  repository(owner: $owner, name: $repo) {
+                    issue(number: $issueNumber) {
+                      projectItems(first: 10) {
+                        nodes {
+                          id
+                          project {
+                            id
+                          }
+                          fieldValues(first: 20) {
+                            nodes {
+                              ... on ProjectV2ItemFieldDateValue {
+                                date
+                                field {
+                                  ... on ProjectV2Field {
+                                    id
+                                    name
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              `;
+              
+              const itemData = await github.graphql(itemQuery, {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issueNumber: issue.number
+              });
+              
+              const projectItem = itemData.repository.issue.projectItems.nodes.find(
+                item => item.project.id === projectId
+              );
+              
+              if (!projectItem) continue;
+              
+              const fieldValues = projectItem.fieldValues.nodes;
+              const startDateValue = fieldValues.find(v => v.field?.name === 'Start Date')?.date;
+              const endDateValue = fieldValues.find(v => v.field?.name === 'End Date')?.date;
+              
+              if (startDateValue && endDateValue) {
+                const startDate = new Date(startDateValue);
+                const endDate = new Date(endDateValue);
+                const duration = endDate - startDate;
+                const days = Math.round(duration / (1000 * 60 * 60 * 24));
+                
+                let selectedOption;
+                if (duration > FOUR_WEEKS_MS) {
+                  selectedOption = criticalOption;
+                } else if (duration > TWO_WEEKS_MS) {
+                  selectedOption = overdueOption;
+                } else {
+                  selectedOption = onTrackOption;
+                }
+                
+                // Update the status field
+                const updateMutation = `
+                  mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) {
+                    updateProjectV2ItemFieldValue(input: {
+                      projectId: $projectId
+                      itemId: $itemId
+                      fieldId: $fieldId
+                      value: { singleSelectOptionId: $optionId }
+                    }) {
+                      projectV2Item {
+                        id
+                      }
+                    }
+                  }
+                `;
+                
+                await github.graphql(updateMutation, {
+                  projectId: projectId,
+                  itemId: projectItem.id,
+                  fieldId: statusField.id,
+                  optionId: selectedOption.id
+                });
+                
+                console.log(`✓ Updated #${issue.number}: ${days} days - ${selectedOption.name}`);
+              }
+            }
